@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Scenario Risk Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e1a24;
+    --slate: #1e3040;
+    --mid: #3a5068;
+    --steel: #6b8fa8;
+    --mist: #c8dae6;
+    --cream: #f4f0ea;
+    --gold: #eaaa2f;
+    --gold-light: #f0bb55;
+    --white: #ffffff;
+    --text: #2c3e4f;
+    --text-light: #5a7080;
+    --border: rgba(100,140,165,0.18);
+    --shadow: 0 4px 32px rgba(14,26,36,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: #eaaa2f;
+    border-bottom: 1px solid rgba(14,26,36,0.18);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 68px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .nav-logo-img {
+    height: 40px; width: auto; display: block;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 0;
+    list-style: none;
+  }
+  .nav-links li a, .nav-links li button {
+    color: rgba(14,26,36,0.78);
+    text-decoration: none; background: none; border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px; letter-spacing: 0.05em; font-weight: 500;
+    padding: 8px 14px; cursor: pointer;
+    transition: color 0.2s;
+    display: block;
+  }
+  .nav-links li a:hover, .nav-links li button:hover,
+  .nav-links li a.active, .nav-links li button.active {
+    color: var(--ink);
+  }
+  .nav-cta {
+    background: var(--ink) !important;
+    color: var(--white) !important;
+    border-radius: 3px; padding: 8px 18px !important;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--slate) !important; }
+
+  /* ---- PAGES ---- */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    background: var(--ink);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    padding: 120px 5vw 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(58,80,104,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(184,146,42,0.08) 0%, transparent 60%),
+      linear-gradient(135deg, #0e1a24 0%, #1a2e40 50%, #0e1a24 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(184,146,42,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,146,42,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(184,146,42,0.12);
+    border: 1px solid rgba(184,146,42,0.3);
+    border-radius: 2px;
+    padding: 6px 14px;
+    margin-bottom: 32px;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .hero-eyebrow::before {
+    content:''; width:20px; height:1px; background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(42px, 6vw, 76px);
+    font-weight: 300; line-height: 1.08;
+    color: var(--white); letter-spacing: -0.01em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero p {
+    font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.65);
+    max-width: 520px; margin-bottom: 44px;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--white);
+    border: none; padding: 14px 28px;
+    font-family: 'Roboto', sans-serif; font-size: 13px;
+    font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.25); padding: 14px 28px;
+    font-family: 'Roboto', sans-serif; font-size: 13px;
+    font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+  .hero-stats {
+    position: absolute; bottom: 60px; right: 5vw; z-index: 2;
+    display: flex; gap: 40px;
+  }
+  .stat { text-align: right; }
+  .stat-num {
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px; font-weight: 300; color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-top: 4px;
+  }
+  .hero-scroll-line {
+    position: absolute; bottom: 0; left: 5vw; z-index: 2;
+    width: 1px; height: 80px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  /* ---- SECTION SHARED ---- */
+  .section { padding: 100px 5vw; }
+  .section-alt { background: var(--white); }
+  .section-dark { background: var(--ink); color: var(--white); }
+  .section-slate { background: var(--slate); color: var(--white); }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content:''; flex: 1; max-width:40px; height:1px; background:var(--gold); }
+  .section-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300; line-height: 1.15; letter-spacing: -0.01em;
+    color: inherit;
+  }
+  .section-title.light { color: var(--white); }
+  .section-intro {
+    font-size: 16px; line-height: 1.75;
+    color: var(--text-light); max-width: 580px; margin-top: 16px;
+  }
+  .section-intro.light { color: rgba(255,255,255,0.6); }
+
+  /* ---- WHAT WE DO (landing) ---- */
+  .what-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap: 2px; margin-top: 60px;
+  }
+  .what-card {
+    background: var(--white);
+    padding: 44px 36px; position: relative; overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.25s;
+  }
+  .what-card:hover { transform: translateY(-4px); }
+  .what-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background: var(--gold); transform: scaleX(0); transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .what-card:hover::before { transform: scaleX(1); }
+  .what-icon {
+    width: 48px; height: 48px; background: rgba(184,146,42,0.1);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    font-size: 22px;
+  }
+  .what-card h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px; font-weight: 400; margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .what-card p { font-size: 14px; line-height: 1.7; color: var(--text-light); }
+
+  /* ---- WHY US ---- */
+  .why-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+  .why-visual {
+    background: var(--slate);
+    aspect-ratio: 4/3; position: relative; overflow: hidden;
+    border-radius: 2px;
+  }
+  .why-visual-inner {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 60%, rgba(184,146,42,0.15) 0%, transparent 60%),
+      linear-gradient(135deg, var(--slate), var(--ink));
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 20px;
+  }
+  .why-visual-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 64px; font-weight: 300;
+    color: rgba(255,255,255,0.08); line-height: 1;
+    text-align: center; letter-spacing: -0.03em;
+  }
+  .why-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+  .why-list li {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding-bottom: 20px; border-bottom: 1px solid var(--border);
+  }
+  .why-list li:last-child { border-bottom: none; }
+  .why-check {
+    width: 22px; height: 22px; background: var(--gold);
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; margin-top: 2px;
+    font-size: 12px; color: var(--white);
+  }
+  .why-list h4 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .why-list p { font-size: 13px; line-height: 1.65; color: var(--text-light); }
+
+  /* ---- PAGE HEADERS ---- */
+  .page-header {
+    background: var(--ink); padding: 140px 5vw 80px;
+    position: relative; overflow: hidden;
+  }
+  .page-header::before {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(58,80,104,0.5) 0%, transparent 70%),
+      linear-gradient(135deg, #0e1a24, #1e3040);
+  }
+  .page-header-grid {
+    position: absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(184,146,42,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,146,42,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .page-header-content { position: relative; z-index:2; max-width:700px; }
+  .page-header h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300; color: var(--white); line-height: 1.1;
+  }
+  .page-header p {
+    font-size: 16px; line-height: 1.75;
+    color: rgba(255,255,255,0.6); margin-top: 18px; max-width: 520px;
+  }
+
+  /* ---- TABS inside page ---- */
+  .tab-nav {
+    display: flex; gap: 0; border-bottom: 2px solid var(--border);
+    margin-bottom: 60px; overflow-x: auto;
+  }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Roboto', sans-serif; font-size: 14px;
+    font-weight: 400; letter-spacing: 0.04em;
+    color: var(--text-light); padding: 16px 28px;
+    border-bottom: 2px solid transparent; margin-bottom: -2px;
+    white-space: nowrap; transition: color 0.2s, border-color 0.2s;
+  }
+  .tab-btn:hover { color: var(--gold); }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 500; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ---- SERVICE TAB HERO (full-bleed, homepage pattern) ---- */
+  .service-hero {
+    position: relative; overflow: hidden;
+    border-radius: 2px;
+    padding: 100px 60px;
+    min-height: 480px;
+    display: flex; align-items: center;
+    margin: 0 -5vw 80px;          /* break out of section padding */
+    background: var(--ink);
+  }
+  .service-hero-photo {
+    position: absolute; inset: 0; z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .service-hero.surveys .service-hero-photo {
+    background-image: url('assets/images/services/survey.jpg');
+  }
+  .service-hero.consultancy .service-hero-photo {
+    background-image: url('assets/images/services/consultancy.jpg');
+  }
+  .service-hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(90deg, rgba(14,26,36,0.92) 0%, rgba(14,26,36,0.74) 45%, rgba(14,26,36,0.4) 100%),
+      linear-gradient(rgba(14,26,36,0.45) 0%, rgba(14,26,36,0.15) 55%, rgba(14,26,36,0.3) 100%);
+  }
+  .service-hero-grid-bg {
+    position: absolute; inset: 0; z-index: 1;
+    background-image:
+      linear-gradient(rgba(184,146,42,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,146,42,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.6;
+  }
+  .service-hero-content {
+    position: relative; z-index: 2;
+    max-width: 620px; padding: 0 5vw;
+  }
+  .service-hero-content .section-label { color: var(--gold-light); margin-bottom: 18px; }
+  .service-hero-content .section-label::after { background: var(--gold-light); }
+  .service-hero-content h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white); letter-spacing: -0.01em;
+    margin-bottom: 24px;
+  }
+  .service-hero-content p {
+    font-size: 16px; line-height: 1.75;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 14px;
+  }
+  @media (max-width: 900px) {
+    .service-hero { padding: 80px 40px; min-height: 380px; }
+    .service-hero-overlay {
+      background: linear-gradient(rgba(14,26,36,0.85), rgba(14,26,36,0.7));
+    }
+  }
+
+  /* ---- SURVEY CARDS ---- */
+  .survey-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px; }
+  .survey-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 2px; padding: 36px; position:relative; overflow:hidden;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .survey-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+  .survey-card-accent {
+    position:absolute; top:0; left:0; bottom:0; width:3px;
+    background: var(--gold);
+  }
+  .survey-card h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px; font-weight: 400; margin-bottom: 10px; color: var(--ink);
+  }
+  .survey-card .tag {
+    display: inline-block; font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; background: rgba(184,146,42,0.1);
+    color: var(--gold); padding: 3px 10px; border-radius: 2px; margin-bottom: 14px;
+  }
+  .survey-card p { font-size: 14px; line-height: 1.7; color: var(--text-light); }
+  .survey-card ul { margin-top: 16px; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .survey-card ul li { display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--text-light); }
+  .survey-card ul li::before { content:'→'; color:var(--gold); flex-shrink:0; }
+
+  /* ---- CONSULTANCY ---- */
+  .consult-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 40px; }
+  .consult-card {
+    background: var(--white); border: 1px solid var(--border);
+    padding: 44px; border-radius: 2px;
+  }
+  .consult-card h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 28px; font-weight: 400; color: var(--ink); margin-bottom: 16px;
+  }
+  .consult-card p { font-size: 14px; line-height: 1.75; color: var(--text-light); margin-bottom: 12px; }
+  .consult-card ul { list-style:none; display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+  .consult-card ul li { display:flex; gap:12px; font-size:13px; line-height:1.6; color:var(--text-light); }
+  .consult-card ul li::before { content:'◆'; color:var(--gold); font-size:8px; flex-shrink:0; margin-top:5px; }
+
+  /* ---- SECTORS ---- */
+  .sectors-intro { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .sector-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 24px; margin-top: 60px; }
+  .sector-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 2px; overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .sector-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+  .sector-card-img {
+    height: 200px; position:relative; overflow:hidden;
+    background: var(--slate);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sector-card-img.waste {
+    background: linear-gradient(135deg, #1a3020, #2d4a35);
+  }
+  .sector-card-img.biomass {
+    background: linear-gradient(135deg, #1a2a15, #2e4020);
+  }
+  .sector-card-img.industrial {
+    background: linear-gradient(135deg, #1a2035, #253050);
+  }
+  .sector-card-img.commercial {
+    background: linear-gradient(135deg, #20202a, #2a2a40);
+  }
+  .sector-card-img.leisure {
+    background: linear-gradient(135deg, #2a1a10, #403025);
+  }
+  .sector-icon {
+    font-size: 64px; opacity: 0.15; position:absolute;
+    bottom: -10px; right: 10px; line-height: 1;
+  }
+  .sector-badge {
+    position:absolute; top:16px; left:16px;
+    background: rgba(184,146,42,0.9); color:var(--white);
+    font-size: 10px; letter-spacing: 0.12em; text-transform:uppercase;
+    padding: 4px 12px; border-radius: 2px;
+    font-weight: 500;
+  }
+  .sector-card-body { padding: 28px 28px 32px; }
+  .sector-card-body h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 10px;
+  }
+  .sector-card-body p { font-size: 13px; line-height: 1.7; color: var(--text-light); margin-bottom: 14px; }
+  .sector-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .sector-tag {
+    font-size: 11px; background: rgba(14,26,36,0.07);
+    color: var(--text-light); padding: 3px 10px; border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---- LIABILITY ---- */
+  .liability-profile {
+    display: grid; grid-template-columns: 300px 1fr; gap: 60px;
+    align-items: start; margin-bottom: 80px;
+  }
+  .profile-card {
+    background: var(--ink); color: var(--white);
+    border-radius: 2px; overflow: hidden;
+    position: relative;
+  }
+  .profile-img {
+    width:100%; aspect-ratio: 3/4;
+    background: linear-gradient(160deg, var(--slate), var(--mid));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 80px; position:relative; overflow:hidden;
+  }
+  .profile-img::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:60px;
+    background: linear-gradient(transparent, var(--ink));
+  }
+  .profile-info { padding: 24px; }
+  .profile-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px; font-weight: 400; color: var(--white);
+  }
+  .profile-role { font-size: 12px; letter-spacing: 0.1em; text-transform:uppercase; color: var(--gold); margin-top:6px; }
+  .profile-bio { font-size: 13px; line-height:1.65; color: rgba(255,255,255,0.55); margin-top:14px; }
+  .liability-content h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 38px; font-weight: 300; margin-bottom: 20px;
+  }
+  .liability-content p { font-size: 15px; line-height: 1.8; color: var(--text-light); margin-bottom: 16px; }
+  .liability-pillars {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px;
+  }
+  .pillar {
+    background: var(--cream); border: 1px solid var(--border);
+    padding: 24px; border-radius: 2px;
+    border-left: 3px solid var(--gold);
+  }
+  .pillar h4 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+  .pillar p { font-size: 13px; line-height:1.65; color: var(--text-light); }
+
+  /* ---- SPECIALIST ---- */
+  .specialist-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 20px; margin-top: 50px;
+  }
+  .specialist-card {
+    background: var(--white); border: 1px solid var(--border);
+    padding: 32px; border-radius: 2px;
+    position: relative; overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .specialist-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+  .specialist-num {
+    position: absolute; top: 20px; right: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 52px; font-weight: 300; line-height: 1;
+    color: rgba(184,146,42,0.08);
+  }
+  .specialist-card h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px; font-weight: 400; margin-bottom: 10px; color: var(--ink);
+  }
+  .specialist-card p { font-size: 13px; line-height: 1.7; color: var(--text-light); }
+
+  /* ---- TEAM ---- */
+  .team-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 24px; margin-top: 60px;
+  }
+  .team-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 2px; overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .team-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+  .team-photo {
+    aspect-ratio: 1/1;
+    background: linear-gradient(160deg, var(--slate), var(--mid));
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    font-size: 56px;
+  }
+  .team-photo .initials {
+    font-family: 'Roboto', sans-serif;
+    font-size: 48px; font-weight: 300; color: rgba(255,255,255,0.3);
+    position: relative; z-index: 1;
+  }
+  .team-photo::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:40px;
+    background: linear-gradient(transparent, var(--slate));
+  }
+  .team-info { padding: 20px 22px 24px; }
+  .team-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px; font-weight: 400; color: var(--ink);
+  }
+  .team-role { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-top: 5px; }
+  .team-bio { font-size: 12px; line-height: 1.65; color: var(--text-light); margin-top: 10px; }
+  .team-divider { width: 24px; height: 2px; background: var(--gold); margin: 10px 0; }
+
+  /* ---- CONTACT ---- */
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  .contact-form-wrap {
+    background: var(--white); border: 1px solid var(--border);
+    padding: 48px; border-radius: 2px;
+  }
+  .contact-form-wrap h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 28px; font-weight: 400; color: var(--ink); margin-bottom: 28px;
+  }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display:block; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-light); margin-bottom:8px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width:100%; background: var(--cream); border: 1px solid var(--border);
+    padding: 12px 16px; font-family: 'Roboto', sans-serif; font-size:14px; color:var(--ink);
+    border-radius: 2px; outline: none; transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--gold);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .contact-info { padding-top: 20px; }
+  .contact-info h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 34px; font-weight: 300; color: var(--ink); line-height: 1.2; margin-bottom: 24px;
+  }
+  .contact-info p { font-size: 15px; line-height: 1.8; color: var(--text-light); margin-bottom: 36px; }
+  .contact-detail { display:flex; gap:16px; align-items:flex-start; margin-bottom:28px; }
+  .contact-icon {
+    width:42px; height:42px; background:rgba(184,146,42,0.1); border-radius:2px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; flex-shrink:0;
+  }
+  .contact-detail h4 { font-size:13px; font-weight:500; color:var(--ink); margin-bottom:4px; }
+  .contact-detail p, .contact-detail a {
+    font-size:14px; color:var(--text-light);
+    text-decoration:none; line-height:1.5;
+  }
+  .contact-detail a:hover { color: var(--gold); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--ink); padding: 60px 5vw 32px;
+    border-top: 1px solid rgba(184,146,42,0.15);
+  }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:60px; margin-bottom:48px; }
+  .footer-logo-img { height: 34px; width: auto; display: block; }
+  .footer-brand p { font-size:13px; line-height:1.75; color:rgba(255,255,255,0.4); margin-top:16px; max-width:280px; }
+  .footer-col h4 {
+    font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:18px; font-weight:500;
+  }
+  .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .footer-col ul li a {
+    font-size:13px; color:rgba(255,255,255,0.45); text-decoration:none;
+    transition:color 0.2s;
+  }
+  .footer-col ul li a:hover { color:var(--gold-light); }
+  .footer-bottom {
+    border-top:1px solid rgba(255,255,255,0.08); padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .footer-bottom p { font-size:12px; color:rgba(255,255,255,0.25); }
+
+  /* ---- DECORATIVE ---- */
+  .gold-line { width:48px; height:2px; background:var(--gold); margin-bottom:24px; }
+  .divider { height:1px; background:var(--border); margin: 60px 0; }
+  .callout-bar {
+    background: var(--gold);
+    padding: 40px 5vw;
+    display: flex; align-items:center; justify-content:space-between; gap:24px;
+  }
+  .callout-bar p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px; font-weight: 400; color: var(--white);
+  }
+  .callout-bar a {
+    background: var(--white); color: var(--gold);
+    padding: 12px 26px; border-radius: 2px;
+    font-size: 13px; font-weight: 500; letter-spacing:0.06em; text-transform:uppercase;
+    text-decoration:none; white-space:nowrap; flex-shrink:0;
+  }
+
+  @media(max-width:900px){
+    .why-layout, .sectors-intro,
+    .liability-profile, .contact-layout, .consult-grid,
+    .footer-grid { grid-template-columns:1fr; }
+    .hero-stats { position:static; display:flex; gap:32px; margin-top:40px; }
+    .stat { text-align:left; }
+    .liability-pillars { grid-template-columns:1fr; }
+  }
+  @media(max-width:700px){
+    .nav-links { display:none; }
+    .hero { padding: 100px 5vw 60px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="data:image/png;base64,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" alt="Scenario Risk Partners" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="sectors.html">Sectors</a></li>
+    <li><a href="liability.html">Liability &amp; Casualty</a></li>
+    <li><a href="specialist.html">Specialist Areas</a></li>
+    <li><a href="team.html">Meet the Team</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div class="page-header-grid"></div>
+  <div class="page-header-content">
+    <div class="hero-eyebrow">What We Do</div>
+    <h1>Our Services</h1>
+    <p>From on-site surveys to strategic risk consultancy, we provide the full spectrum of risk intelligence services &#8212; tailored to your specific needs.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab(this,'surveys')">Surveys</button>
+    <button class="tab-btn" onclick="showTab(this,'consultancy')">Risk Management &amp; Consultancy</button>
+  </div>
+
+  <div id="tab-surveys" class="tab-content active">
+    <div class="service-hero surveys">
+      <div class="service-hero-photo"></div>
+      <div class="service-hero-grid-bg"></div>
+      <div class="service-hero-overlay"></div>
+      <div class="service-hero-content">
+        <div class="section-label">Survey Services</div>
+        <h2>Comprehensive Survey Solutions</h2>
+        <p>Our surveying capability spans on-site physical inspections, desktop and virtual assessments, and cutting-edge drone surveys &#8212; giving you the right type of intelligence for every risk profile and budget.</p>
+        <p>Each survey is carried out by qualified, experienced professionals who understand the commercial realities of insurance and the underwriting decisions that follow.</p>
+      </div>
+    </div>
+    <div class="survey-types">
+      <div class="survey-card">
+        <div class="survey-card-accent"></div>
+        <div class="tag">Physical Inspection</div>
+        <h3>On-Site Surveys</h3>
+        <p>Our most comprehensive survey offering. A qualified surveyor attends the premises to carry out a thorough physical inspection, producing a detailed risk report aligned to underwriter requirements.</p>
+        <ul>
+          <li>COPE Surveys &#8212; Construction, Occupancy, Protection &amp; Exposure assessed in full</li>
+          <li>Pre-Cover Surveys &#8212; risk intelligence before inception or renewal</li>
+          <li>Policyholder compliance and clause verification</li>
+          <li>Loss estimate assessments</li>
+          <li>Risk improvement recommendations with follow-up</li>
+        </ul>
+      </div>
+      <div class="survey-card">
+        <div class="survey-card-accent"></div>
+        <div class="tag">Remote Assessment</div>
+        <h3>Desktop / Virtual Surveys</h3>
+        <p>A cost-effective, fast-turnaround alternative for lower-risk properties or where rapid assessment is needed. Our desktop surveys draw on open-source intelligence, satellite imagery, and structured virtual interviews with the policyholder.</p>
+        <ul>
+          <li>Remote risk profiling using satellite, aerial, and mapping data</li>
+          <li>Structured virtual interviews with key contacts on-site</li>
+          <li>Occupancy and operational risk reviews</li>
+          <li>Available as a standalone report or as a complement to on-site surveys</li>
+          <li>Rapid turnaround &#8212; ideal for time-sensitive underwriting decisions</li>
+        </ul>
+      </div>
+      <div class="survey-card">
+        <div class="survey-card-accent"></div>
+        <div class="tag">UAV Technology</div>
+        <h3>Drone Surveys</h3>
+        <p>Using UAV technology, our drone surveys provide detailed aerial intelligence of complex or large-footprint sites &#8212; capturing roof condition, perimeter, exposure, and site layout with exceptional clarity.</p>
+        <ul>
+          <li>High-resolution aerial imagery of the full site and roof structures</li>
+          <li>Assessment of roof integrity, guttering, and drainage condition</li>
+          <li>Perimeter and exposure mapping</li>
+          <li>Ideal for large industrial, commercial, and multi-building sites</li>
+          <li>Compliant with CAA regulations &#8212; fully insured operators</li>
+          <li>Reduces need for costly scaffolding or manual roof inspections</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-consultancy" class="tab-content">
+    <div class="service-hero consultancy">
+      <div class="service-hero-photo"></div>
+      <div class="service-hero-grid-bg"></div>
+      <div class="service-hero-overlay"></div>
+      <div class="service-hero-content">
+        <div class="section-label">Consultancy</div>
+        <h2>Risk Management &amp; Consultancy</h2>
+        <p>Beyond the survey, we act as strategic risk partners &#8212; providing ongoing consultancy that helps businesses understand, manage, and reduce their risk profile over time.</p>
+        <p>Our consultancy services are designed to create lasting value for both insurers and policyholders, reducing loss frequency and supporting sustainable portfolios.</p>
+      </div>
+    </div>
+    <div class="consult-grid">
+      <div class="consult-card">
+        <div class="gold-line"></div>
+        <h3 id="risk-consultancy">Risk Consultancy</h3>
+        <p>We work alongside underwriters, brokers, and risk managers to deliver expert technical guidance on complex or high-value risks. Our consultants bring deep sector knowledge and practical experience to every engagement.</p>
+        <p>Whether you need support on a single complex account or ongoing strategic input across a portfolio, our consultancy offering is built around your needs.</p>
+        <ul>
+          <li>Pre-underwriting risk review and intelligence</li>
+          <li>Portfolio risk analysis and benchmarking</li>
+          <li>Technical guidance on complex industrial and commercial risks</li>
+          <li>Risk improvement programme design and management</li>
+          <li>Clause and endorsement drafting support</li>
+          <li>Expert support for claims and loss investigations</li>
+          <li>Bespoke training for underwriting and broking teams</li>
+        </ul>
+      </div>
+      <div class="consult-card">
+        <div class="gold-line"></div>
+        <h3 id="aftercare">Aftercare</h3>
+        <p>A survey report is only as valuable as the action taken. Our aftercare service ensures that risk improvement recommendations are tracked, followed up, and completed &#8212; creating a continuous feedback loop that keeps insurers informed and policyholders accountable.</p>
+        <p>This service is particularly valued by underwriters who want to demonstrate proactive portfolio management and by brokers seeking to add tangible value to their client relationships.</p>
+        <ul>
+          <li>Structured follow-up on outstanding risk improvement actions</li>
+          <li>Evidence collection and documentation of improvements made</li>
+          <li>Periodic re-survey to verify compliance</li>
+          <li>Progress reporting to underwriters and brokers</li>
+          <li>Ongoing dialogue with policyholders on risk management best practice</li>
+          <li>Support through mid-term changes, extensions, and renewals</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="callout-bar">
+  <p>Want to discuss the right survey solution for your risk?</p>
+  <a href="contact.html">Contact Our Team</a>
+</div>
+<script>
+function showTab(btn,id){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+// On load, check hash and open matching tab if present
+document.addEventListener('DOMContentLoaded', ()=>{
+  const hash = (location.hash || '').replace('#','');
+  if(hash){
+    const tabEl = document.getElementById('tab-'+hash);
+    if(tabEl){
+      // find corresponding button (onclick contains the id)
+      const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => (b.getAttribute('onclick')||'').includes("'"+hash+"'") );
+      if(btn){ showTab(btn, hash); }
+      else { tabEl.classList.add('active'); }
+      // scroll to top of the section for better UX
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    } else {
+      // If hash targets an element inside the consultancy tab (e.g. #risk-consultancy or #aftercare), open consultancy then scroll to it
+      const targetEl = document.getElementById(hash);
+      if(targetEl){
+        const consultancyBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => (b.getAttribute('onclick')||'').includes("'consultancy'"));
+        if(consultancyBtn){ showTab(consultancyBtn, 'consultancy'); }
+        else { document.getElementById('tab-consultancy') && document.getElementById('tab-consultancy').classList.add('active'); }
+        // allow rendering then scroll into view
+        setTimeout(()=> { targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80);
+      }
+    }
+  }
+});
+</script>
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="data:image/png;base64,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" alt="Scenario Risk Partners" class="footer-logo-img">
+      <p>Specialist risk management and surveying solutions for insurers, underwriters and brokers across the UK and Ireland.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">On-Site Surveys</a></li>
+        <li><a href="services.html">Drone Surveys</a></li>
+        <li><a href="services.html">Desktop Surveys</a></li>
+        <li><a href="services.html#risk-consultancy">Risk Consultancy</a></li>
+        <li><a href="services.html#aftercare">Aftercare</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="team.html">Meet the Team</a></li>
+        <li><a href="sectors.html">Sectors</a></li>
+        <li><a href="liability.html">Liability &amp; Casualty</a></li>
+        <li><a href="specialist.html">Specialist Areas</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@scenario.partners">hello@scenario.partners</a></li>
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright &copy; 2026 Scenario Risk Partners Ltd.</p>
+  </div>
+</footer>
+</body>
+</html>
