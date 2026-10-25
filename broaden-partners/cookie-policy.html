@@ -359,7 +359,7 @@ footer ul li a:hover { color: var(--leaf-bright); }
 .legal strong { color: var(--cream); font-weight: 600; }
 .legal a { color: var(--leaf); text-underline-offset: 3px; }
 .legal a:hover { color: var(--leaf-bright); }
-.legal code { font-family: var(--mono); font-size: 13px; color: var(--cream); }
+.legal code { font-family: var(--mono); font-size: 13px; color: var(--cream); overflow-wrap: anywhere; }
 .legal table {
   width: 100%; border-collapse: collapse; margin: 8px 0 28px;
   background: var(--panel); border: 1px solid var(--panel-line);
@@ -452,7 +452,7 @@ footer ul li a:hover { color: var(--leaf-bright); }
 <p class="legal-meta">Last updated: 25 October 2026</p>
 
 <h2 id="about">1. About this policy</h2>
-<p>This cookie policy explains how Broaden Management Partners ("we", "us", "our") uses cookies and similar technologies on this website, in line with the Privacy and Electronic Communications Regulations 2003 (PECR) and the UK GDPR. It should be read alongside our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+<p>This cookie policy explains how Broaden Management Partners Limited ("we", "us", "our") uses cookies and similar technologies on this website, in line with the Privacy and Electronic Communications Regulations 2003 (PECR) and the UK GDPR. It should be read alongside our <a href="privacy-policy.html">Privacy Policy</a>.</p>
 
 <h2 id="what-are-cookies">2. What are cookies?</h2>
 <p>Cookies are small text files placed on your device when you visit a website. They are widely used to make websites work, to keep them secure and to provide information to site owners. Similar technologies, such as local storage and pixels, work in a similar way, and we refer to all of them as "cookies" in this policy.</p>
@@ -471,19 +471,20 @@ footer ul li a:hover { color: var(--leaf-bright); }
 </thead>
 <tbody>
 <tr><td><strong>Strictly necessary</strong></td><td>Keep the website secure and working — for example, cookies set by our hosting and security provider, Cloudflare, to detect malicious traffic and bots (such as <code>__cf_bm</code>, which lasts 30 minutes).</td><td>No — these are essential to provide the website you have asked to use.</td></tr>
+<tr><td><strong>Strictly necessary</strong></td><td>Remember your cookie choice so we don't ask again on every page. This is stored in your browser's local storage as <code>bmp_cookie_consent</code> and lasts 12 months, after which we ask again.</td><td>No — this is needed to respect your choice.</td></tr>
 <tr><td><strong>Analytics</strong></td><td>Help us understand how visitors use the website so we can improve it.</td><td>Yes — not currently in use.</td></tr>
 <tr><td><strong>Marketing</strong></td><td>Show relevant job or service adverts on other websites.</td><td>Yes — not currently in use.</td></tr>
 </tbody>
 </table>
 
-<p>If we introduce analytics, marketing or any other non-essential cookies in future, we will update this policy and ask for your consent through a cookie banner before any are set. You will be able to change your choice at any time.</p>
+<p>When you first visit, our cookie banner asks whether you accept non-essential cookies, and rejecting them is as easy as accepting. We will never set non-essential cookies unless you accept, and if we introduce any in future we will update this policy first. You can change your choice at any time using the <a href="#managing" data-cookie-settings>Cookie settings</a> link in the footer of every page.</p>
 
 <h2 id="third-party">4. Third-party services</h2>
 <p>Our pages load fonts from <strong>Google Fonts</strong>. When your browser requests these fonts, Google receives your IP address and basic browser information so it can deliver them. Google states that the Google Fonts service does not set cookies or use this information to profile you. See <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Google's Fonts privacy FAQ</a> for details.</p>
 <p>Links to other websites, such as LinkedIn, are not covered by this policy. Those sites may set their own cookies when you visit them, under their own cookie policies.</p>
 
 <h2 id="managing">5. Managing cookies</h2>
-<p>You can control and delete cookies through your browser settings. Most browsers let you block all cookies, block third-party cookies only, or delete cookies when you close the browser. Guidance for common browsers:</p>
+<p>You can change your choice on our website at any time using the <a href="#managing" data-cookie-settings>Cookie settings</a> link in the footer. You can also control and delete cookies through your browser settings. Most browsers let you block all cookies, block third-party cookies only, or delete cookies when you close the browser. Guidance for common browsers:</p>
 <ul>
 <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
 <li><a href="https://support.apple.com/en-gb/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Apple Safari</a></li>
@@ -496,7 +497,7 @@ footer ul li a:hover { color: var(--leaf-bright); }
 <p>We may update this policy from time to time, for example if we start using new cookies. The latest version will always be on this page, with the date it was last updated at the top.</p>
 
 <h2 id="contact">7. Contact us</h2>
-<p>If you have any questions about our use of cookies, please email <a href="mailto:hello@broaden.partners">hello@broaden.partners</a> or write to Broaden Management Partners, 8-9 New Street, EC2M 4TP.</p>
+<p>If you have any questions about our use of cookies, please email <a href="mailto:hello@broaden.partners">hello@broaden.partners</a> or write to Broaden Management Partners Limited, 8-9 New Street, EC2M 4TP.</p>
   </div>
 </section>
 </main>
@@ -529,11 +530,12 @@ footer ul li a:hover { color: var(--leaf-bright); }
         <li><a href="privacy-policy.html">Privacy Policy</a></li>
         <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
         <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        <li><a href="cookie-policy.html#managing" data-cookie-settings>Cookie settings</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Broaden Management Partners. All rights reserved.</span>
+    <span>© 2026 Broaden Management Partners Limited. All rights reserved. Registered in England and Wales, company no. 16869938. Registered office: 8-9 New Street, London EC2M 4TP.</span>
     <span>Insurance · Insurtech · Technology · Finance Recruitment</span>
   </div>
 </footer>
@@ -554,5 +556,6 @@ footer ul li a:hover { color: var(--leaf-bright); }
   });
 })();
 </script>
+<script src="assets/cookie-consent.js" defer></script>
 </body>
 </html>
